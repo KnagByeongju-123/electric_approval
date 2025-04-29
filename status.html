@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>진행상황 조회</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { text-align: center; margin-bottom: 20px; }
+    input, button { padding: 10px; font-size: 16px; width: 100%; box-sizing: border-box; margin-top: 10px; }
+    button { background-color: #4CAF50; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { background-color: #45a049; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: center; }
+    th { background-color: #f2f2f2; }
+  </style>
+</head>
+<body>
+  <h1>결재 진행상황 조회</h1>
+
+  <input type="email" id="emailInput" placeholder="조회할 이메일을 입력하세요" required>
+  <button onclick="fetchApprovals()">조회하기</button>
+
+  <div id="resultArea"></div>
+
+  <script>
+    function fetchApprovals() {
+      const email = document.getElementById('emailInput').value.trim();
+      if (!email) {
+        alert('이메일을 입력해주세요.');
+        return;
+      }
+
+      fetch('https://script.google.com/macros/s/AKfycbyExPlA9Yr2JsXqgKRKS0a7dfA5zNr4N8q-XCCOldoaaGl0rwV-KwfmDHplbGJRlP-h/exec?action=getMyApprovals&requester=' + encodeURIComponent(email))
+        .then(response => response.json())
+        .then(data => {
+          const resultArea = document.getElementById('resultArea');
+          if (data.length === 0) {
+            resultArea.innerHTML = '<p>신청한 건이 없습니다.</p>';
+          } else {
+            let html = '<table><tr><th>제목</th><th>상태</th><th>현재/총단계</th></tr>';
+            data.forEach(item => {
+              html += `<tr><td>${item.title}</td><td>${item.status}</td><td>${item.current}/${item.total}</td></tr>`;
+            });
+            html += '</table>';
+            resultArea.innerHTML = html;
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          document.getElementById('resultArea').innerHTML = '<p>조회 실패</p>';
+        });
+    }
+  </script>
+</body>
+</html>

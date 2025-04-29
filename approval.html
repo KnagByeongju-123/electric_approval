@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>결재 신청</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { text-align: center; margin-bottom: 30px; }
+    form { display: flex; flex-direction: column; max-width: 400px; margin: auto; gap: 15px; }
+    input, textarea, button { padding: 10px; font-size: 16px; width: 100%; box-sizing: border-box; }
+    button { background-color: #4CAF50; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { background-color: #45a049; }
+  </style>
+</head>
+<body>
+  <h1>결재 신청서 작성</h1>
+  <form id="approvalForm">
+    <!-- 신청자 이메일 -->
+    <label>신청자 이메일</label>
+    <input type="email" name="requester" required>
+
+    <!-- 제목 -->
+    <label>제목</label>
+    <input type="text" name="title" required>
+
+    <!-- 상세내용 -->
+    <label>내용</label>
+    <textarea name="content" rows="5" required></textarea>
+
+    <!-- 결재자1 이메일 -->
+    <label>1차 결재자 이메일</label>
+    <input type="email" name="approver1" required>
+
+    <!-- 결재자2 이메일 (선택) -->
+    <label>2차 결재자 이메일 (선택)</label>
+    <input type="email" name="approver2">
+
+    <!-- 결재자3 이메일 (선택) -->
+    <label>3차 결재자 이메일 (선택)</label>
+    <input type="email" name="approver3">
+
+    <!-- 제출 버튼 -->
+    <button type="submit">✍️ 신청하기</button>
+  </form>
+
+  <script>
+    document.getElementById('approvalForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(this));
+      fetch('https://script.google.com/macros/s/AKfycbyExPlA9Yr2JsXqgKRKS0a7dfA5zNr4N8q-XCCOldoaaGl0rwV-KwfmDHplbGJRlP-h/exec', { 
+        method: 'POST',
+        mode: 'no-cors', // 꼭 필요
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams(data).toString()
+      })
+      .then(() => {
+        alert('결재 신청이 완료되었습니다!');
+        location.href = 'status.html';
+      })
+      .catch(err => {
+        console.error(err);
+        alert('신청 실패: ' + err.message);
+      });
+    });
+  </script>
+</body>
+</html>
