@@ -3,23 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>전자결재 시스템</title>
+  <title>전자결재 메인</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; text-align: center; }
-    h1 { margin-bottom: 30px; }
-    button { padding: 15px; font-size: 18px; width: 80%; max-width: 300px; margin: 10px; border-radius: 6px; border: none; background-color: #4CAF50; color: white; cursor: pointer; }
+    body { font-family: Arial, sans-serif; text-align: center; margin: 40px; }
+    h1 { margin-bottom: 40px; }
+    button {
+      width: 80%;
+      max-width: 300px;
+      padding: 15px;
+      font-size: 18px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
     button:hover { background-color: #45a049; }
   </style>
 </head>
 <body>
-  <h1>전자결재 시스템</h1>
-  <button onclick="moveTo('approval.html')">✍️ 결재 신청하기</button><br>
-  <button onclick="moveTo('status.html')">🔎 진행상황 조회하기</button>
 
-  <script>
-    function moveTo(page) {
-      location.href = page;
-    }
-  </script>
+<h1>전자결재 시스템</h1>
+
+<button onclick="location.href='approval.html'">✍️ 결재 신청하기</button><br>
+<button onclick="location.href='status.html'">🔎 진행상황 조회하기</button>
+
 </body>
 </html>
