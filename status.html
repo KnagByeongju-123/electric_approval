@@ -33,7 +33,7 @@ function fetchApprovals() {
     return;
   }
 
-  fetch('https://script.google.com/macros/s/AKfycbymh2yXl1X3cQFv0g3XHqbzIruymHWoYLMCRS0sf_T8Xs3UOtwRXKxL5Pm6gBP8NafJ/exec?action=getMyApprovals&requester=' + encodeURIComponent(email))
+  fetch('https://script.google.com/macros/s/AKfycbwsoXq16yKyO0jZETlWUI7dbWpUvip3ag75Tz8ahP_B25Wt9-7vDUZL0RTY-8GymZ3z/exec?action=getMyApprovals&requester=' + encodeURIComponent(email))
     .then(response => response.json())
     .then(data => {
       const resultArea = document.getElementById('resultArea');
