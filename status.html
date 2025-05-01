@@ -13,6 +13,7 @@
     table { width: 100%; border-collapse: collapse; margin-top: 20px; }
     th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: center; }
     th { background-color: #f2f2f2; }
+
   </style>
 </head>
 <body>
@@ -32,7 +33,7 @@ function fetchApprovals() {
     return;
   }
 
-  fetch('https://script.google.com/macros/s/AKfycbxfv-kQWo7ETSTZKbEZsZlrvyidMljVSICiAe2gTInd6gI0iqL5bEBspdYo9LcvWmMA/exec?action=getMyApprovals&requester=' + encodeURIComponent(email))
+  fetch('https://script.google.com/macros/s/AKfycbzdC5bI8iyp8bb37ELhHhp1QFiKfdn7nXcocNBjibs5oxv6O2rCS4yN1J0WsC8gKCM/exec?action=getMyApprovals&requester=' + encodeURIComponent(email))
     .then(response => response.json())
     .then(data => {
       const resultArea = document.getElementById('resultArea');
